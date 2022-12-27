@@ -11,7 +11,7 @@ const fetcher = async(method, ep, body={})=> {
 }
 const getData= (ep) => {
     return new Promise((resolve, reject)=> {
-        fetch(`https://61a704fc8395690017be9460.mockapi.io/${ep}`)
+        fetch(`https://jsonplaceholder.typicode.com/${ep}`)
         .then(res => {
             if (!res.ok) return Promise.reject(new Error(`HTTP Error ${res.status}`));
     

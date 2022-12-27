@@ -5,22 +5,31 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <script type="text/javascript" src="task6.js"></script>
+    <script type="text/javascript" src="apiHelper.js"></script>
+    <link rel="stylesheet" href="style.css" >
   </head>
   <body>
     <div id="content"></div>
-    <script>
-      fetch("https://jsonplaceholder.typicode.com/users")
-        .then((res) => {
-          if (!res.ok)
-            return Promise.reject(new Error(`HTTP Error ${res.status}`));
+<script>
+ fetcher("GET", "users").then((data) => {
+        document.getElementById("content").innerHTML = data // data tersebut akan ditampilkan pada dom "content"
+          .map(
+            (item) => 
+              `<div class="card-output">
+                    <div class="font20px-reg text-black">${item.name}</div>
+                    <div class="font20px-reg text-black">${item.username}</div>
+                    <div class="font20px-reg text-black">${item.email}</div>
+                    <div class="font20px-reg text-black">${item.address.street} ${item.address.suite} ${item.address.city} ${item.address.zipcode}</div>
+                    <div class="font20px-reg text-black">${item.phone}</div>
+                    <div class="font20px-reg text-black">${item.website}</div>
+                    <div class="font20px-reg text-black">${item.company.name} ${item.company.catchPhrase} ${item.company.bs}</div>
+                </div>
+                `
+          )
+          .join("");
+      });
+</script>
 
-          return res.json();
-        })
-        .then((data) => {
-          console.log(data);
-        })
-        .catch((err) => console.log(err));
-    </script>
+  </script>
   </body>
 </html>
